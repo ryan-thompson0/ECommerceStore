@@ -91,7 +91,7 @@ export function CartItem({ item }: CartItemProps) {
             </span>
             <Button
               size="sm"
-              variant="danger"
+              variant="destructive"
               onClick={() => removeItem(product.id)}
               className="p-2"
             >

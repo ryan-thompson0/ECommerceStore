@@ -39,7 +39,7 @@ export default function CheckoutPage() {
         {/* Order Summary */}
         <div className="lg:col-span-1">
           <div className="sticky top-24">
-            <Card>
+            <Card className="p-6">
               <h2 className="text-xl font-bold mb-4">Order Items</h2>
               <div className="space-y-3 max-h-96 overflow-y-auto">
                 {items.map((item) => (

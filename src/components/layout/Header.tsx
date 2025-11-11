@@ -51,7 +51,7 @@ export function Header() {
           >
             <ShoppingCart className="h-6 w-6" />
             {totalItems > 0 && (
-              <Badge variant="danger" size="sm" className="absolute -top-2 -right-2">
+              <Badge variant="destructive" className="absolute -top-2 -right-2">
                 {totalItems}
               </Badge>
             )}

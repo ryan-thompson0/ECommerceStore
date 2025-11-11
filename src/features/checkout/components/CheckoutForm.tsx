@@ -6,10 +6,11 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { Input, Button, Card } from '@/components/ui';
+import { Input, Button, Card, Label } from '@/components/ui';
 import { useCartStore } from '@/store/cart';
 import { checkoutFormSchema } from '@/lib/validations/checkout';
 import type { CheckoutFormData } from '@/types';
+import { Loader2 } from 'lucide-react';
 
 export function CheckoutForm() {
   const router = useRouter();
@@ -99,104 +100,166 @@ export function CheckoutForm() {
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
       {/* Contact Information */}
-      <Card>
+      <Card className="p-6">
         <h2 className="text-xl font-bold mb-4">Contact Information</h2>
-        <Input
-          type="email"
-          name="email"
-          label="Email"
-          value={formData.email}
-          onChange={handleInputChange}
-          error={errors.email}
-          required
-          placeholder="john@example.com"
-        />
+        <div className="space-y-2">
+          <Label htmlFor="email">
+            Email <span className="text-red-500">*</span>
+          </Label>
+          <Input
+            id="email"
+            type="email"
+            name="email"
+            value={formData.email}
+            onChange={handleInputChange}
+            required
+            placeholder="john@example.com"
+            className={errors.email ? 'border-red-500' : ''}
+          />
+          {errors.email && (
+            <p className="text-sm text-red-600">{errors.email}</p>
+          )}
+        </div>
       </Card>
 
       {/* Shipping Address */}
-      <Card>
+      <Card className="p-6">
         <h2 className="text-xl font-bold mb-4">Shipping Address</h2>
         <div className="space-y-4">
-          <Input
-            type="text"
-            name="shippingAddress.fullName"
-            label="Full Name"
-            value={formData.shippingAddress.fullName}
-            onChange={handleInputChange}
-            error={errors['shippingAddress.fullName']}
-            required
-            placeholder="John Doe"
-          />
-          <Input
-            type="text"
-            name="shippingAddress.address"
-            label="Address"
-            value={formData.shippingAddress.address}
-            onChange={handleInputChange}
-            error={errors['shippingAddress.address']}
-            required
-            placeholder="123 Main St"
-          />
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="space-y-2">
+            <Label htmlFor="fullName">
+              Full Name <span className="text-red-500">*</span>
+            </Label>
             <Input
+              id="fullName"
               type="text"
-              name="shippingAddress.city"
-              label="City"
-              value={formData.shippingAddress.city}
+              name="shippingAddress.fullName"
+              value={formData.shippingAddress.fullName}
               onChange={handleInputChange}
-              error={errors['shippingAddress.city']}
               required
-              placeholder="San Francisco"
+              placeholder="John Doe"
+              className={errors['shippingAddress.fullName'] ? 'border-red-500' : ''}
             />
-            <Input
-              type="text"
-              name="shippingAddress.state"
-              label="State"
-              value={formData.shippingAddress.state}
-              onChange={handleInputChange}
-              error={errors['shippingAddress.state']}
-              required
-              placeholder="CA"
-            />
+            {errors['shippingAddress.fullName'] && (
+              <p className="text-sm text-red-600">{errors['shippingAddress.fullName']}</p>
+            )}
           </div>
+
+          <div className="space-y-2">
+            <Label htmlFor="address">
+              Address <span className="text-red-500">*</span>
+            </Label>
+            <Input
+              id="address"
+              type="text"
+              name="shippingAddress.address"
+              value={formData.shippingAddress.address}
+              onChange={handleInputChange}
+              required
+              placeholder="123 Main St"
+              className={errors['shippingAddress.address'] ? 'border-red-500' : ''}
+            />
+            {errors['shippingAddress.address'] && (
+              <p className="text-sm text-red-600">{errors['shippingAddress.address']}</p>
+            )}
+          </div>
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <Input
-              type="text"
-              name="shippingAddress.zipCode"
-              label="ZIP Code"
-              value={formData.shippingAddress.zipCode}
-              onChange={handleInputChange}
-              error={errors['shippingAddress.zipCode']}
-              required
-              placeholder="94102"
-            />
-            <Input
-              type="text"
-              name="shippingAddress.country"
-              label="Country"
-              value={formData.shippingAddress.country}
-              onChange={handleInputChange}
-              error={errors['shippingAddress.country']}
-              required
-              placeholder="United States"
-            />
+            <div className="space-y-2">
+              <Label htmlFor="city">
+                City <span className="text-red-500">*</span>
+              </Label>
+              <Input
+                id="city"
+                type="text"
+                name="shippingAddress.city"
+                value={formData.shippingAddress.city}
+                onChange={handleInputChange}
+                required
+                placeholder="San Francisco"
+                className={errors['shippingAddress.city'] ? 'border-red-500' : ''}
+              />
+              {errors['shippingAddress.city'] && (
+                <p className="text-sm text-red-600">{errors['shippingAddress.city']}</p>
+              )}
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="state">
+                State <span className="text-red-500">*</span>
+              </Label>
+              <Input
+                id="state"
+                type="text"
+                name="shippingAddress.state"
+                value={formData.shippingAddress.state}
+                onChange={handleInputChange}
+                required
+                placeholder="CA"
+                className={errors['shippingAddress.state'] ? 'border-red-500' : ''}
+              />
+              {errors['shippingAddress.state'] && (
+                <p className="text-sm text-red-600">{errors['shippingAddress.state']}</p>
+              )}
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="space-y-2">
+              <Label htmlFor="zipCode">
+                ZIP Code <span className="text-red-500">*</span>
+              </Label>
+              <Input
+                id="zipCode"
+                type="text"
+                name="shippingAddress.zipCode"
+                value={formData.shippingAddress.zipCode}
+                onChange={handleInputChange}
+                required
+                placeholder="94102"
+                className={errors['shippingAddress.zipCode'] ? 'border-red-500' : ''}
+              />
+              {errors['shippingAddress.zipCode'] && (
+                <p className="text-sm text-red-600">{errors['shippingAddress.zipCode']}</p>
+              )}
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="country">
+                Country <span className="text-red-500">*</span>
+              </Label>
+              <Input
+                id="country"
+                type="text"
+                name="shippingAddress.country"
+                value={formData.shippingAddress.country}
+                onChange={handleInputChange}
+                required
+                placeholder="United States"
+                className={errors['shippingAddress.country'] ? 'border-red-500' : ''}
+              />
+              {errors['shippingAddress.country'] && (
+                <p className="text-sm text-red-600">{errors['shippingAddress.country']}</p>
+              )}
+            </div>
           </div>
         </div>
       </Card>
 
       {/* Payment Method */}
-      <Card>
+      <Card className="p-6">
         <h2 className="text-xl font-bold mb-4">Payment Method</h2>
         <div className="space-y-4">
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+          <div className="space-y-2">
+            <Label htmlFor="paymentType">
               Payment Type <span className="text-red-500">*</span>
-            </label>
+            </Label>
             <select
+              id="paymentType"
               name="paymentMethod.type"
               value={formData.paymentMethod.type}
               onChange={handleInputChange}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-base shadow-sm transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring md:text-sm"
             >
               <option value="credit_card">Credit Card</option>
               <option value="debit_card">Debit Card</option>
@@ -206,40 +269,66 @@ export function CheckoutForm() {
 
           {formData.paymentMethod.type !== 'paypal' && (
             <>
-              <Input
-                type="text"
-                name="paymentMethod.cardNumber"
-                label="Card Number"
-                value={formData.paymentMethod.cardNumber}
-                onChange={handleInputChange}
-                error={errors['paymentMethod.cardNumber']}
-                required
-                placeholder="1234567890123456"
-                maxLength={16}
-              />
+              <div className="space-y-2">
+                <Label htmlFor="cardNumber">
+                  Card Number <span className="text-red-500">*</span>
+                </Label>
+                <Input
+                  id="cardNumber"
+                  type="text"
+                  name="paymentMethod.cardNumber"
+                  value={formData.paymentMethod.cardNumber}
+                  onChange={handleInputChange}
+                  required
+                  placeholder="1234567890123456"
+                  maxLength={16}
+                  className={errors['paymentMethod.cardNumber'] ? 'border-red-500' : ''}
+                />
+                {errors['paymentMethod.cardNumber'] && (
+                  <p className="text-sm text-red-600">{errors['paymentMethod.cardNumber']}</p>
+                )}
+              </div>
+
               <div className="grid grid-cols-2 gap-4">
-                <Input
-                  type="text"
-                  name="paymentMethod.expiryDate"
-                  label="Expiry Date"
-                  value={formData.paymentMethod.expiryDate}
-                  onChange={handleInputChange}
-                  error={errors['paymentMethod.expiryDate']}
-                  required
-                  placeholder="MM/YY"
-                  maxLength={5}
-                />
-                <Input
-                  type="text"
-                  name="paymentMethod.cvv"
-                  label="CVV"
-                  value={formData.paymentMethod.cvv}
-                  onChange={handleInputChange}
-                  error={errors['paymentMethod.cvv']}
-                  required
-                  placeholder="123"
-                  maxLength={4}
-                />
+                <div className="space-y-2">
+                  <Label htmlFor="expiryDate">
+                    Expiry Date <span className="text-red-500">*</span>
+                  </Label>
+                  <Input
+                    id="expiryDate"
+                    type="text"
+                    name="paymentMethod.expiryDate"
+                    value={formData.paymentMethod.expiryDate}
+                    onChange={handleInputChange}
+                    required
+                    placeholder="MM/YY"
+                    maxLength={5}
+                    className={errors['paymentMethod.expiryDate'] ? 'border-red-500' : ''}
+                  />
+                  {errors['paymentMethod.expiryDate'] && (
+                    <p className="text-sm text-red-600">{errors['paymentMethod.expiryDate']}</p>
+                  )}
+                </div>
+
+                <div className="space-y-2">
+                  <Label htmlFor="cvv">
+                    CVV <span className="text-red-500">*</span>
+                  </Label>
+                  <Input
+                    id="cvv"
+                    type="text"
+                    name="paymentMethod.cvv"
+                    value={formData.paymentMethod.cvv}
+                    onChange={handleInputChange}
+                    required
+                    placeholder="123"
+                    maxLength={4}
+                    className={errors['paymentMethod.cvv'] ? 'border-red-500' : ''}
+                  />
+                  {errors['paymentMethod.cvv'] && (
+                    <p className="text-sm text-red-600">{errors['paymentMethod.cvv']}</p>
+                  )}
+                </div>
               </div>
             </>
           )}
@@ -249,9 +338,10 @@ export function CheckoutForm() {
       <Button
         type="submit"
         size="lg"
-        fullWidth
-        isLoading={isSubmitting}
+        className="w-full"
+        disabled={isSubmitting}
       >
+        {isSubmitting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
         {isSubmitting ? 'Processing...' : 'Complete Order'}
       </Button>
     </form>

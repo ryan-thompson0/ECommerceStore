@@ -60,7 +60,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
 
           {/* Product Info */}
           <div className="flex flex-col">
-            <Badge variant="info" size="md" className="w-fit mb-3 capitalize">
+            <Badge className="w-fit mb-3 capitalize bg-blue-100 text-blue-800 hover:bg-blue-100/80">
               {product.category}
             </Badge>
 

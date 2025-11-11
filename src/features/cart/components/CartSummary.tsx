@@ -17,7 +17,7 @@ export function CartSummary() {
   const qualifiesForFreeShipping = remainingForFreeShipping <= 0;
 
   return (
-    <Card>
+    <Card className="p-6">
       <h2 className="text-xl font-bold mb-4">Order Summary</h2>
 
       <div className="space-y-3 mb-4">
@@ -58,7 +58,7 @@ export function CartSummary() {
 
       <Link href="/checkout">
         <Button
-          fullWidth
+          className="w-full"
           size="lg"
           disabled={items.length === 0}
         >
@@ -68,10 +68,8 @@ export function CartSummary() {
 
       <Link href="/">
         <Button
-          fullWidth
+          className="w-full mt-3"
           variant="outline"
-          size="md"
-          className="mt-3"
         >
           Continue Shopping
         </Button>

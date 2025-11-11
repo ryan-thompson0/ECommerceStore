@@ -26,7 +26,7 @@ export function ProductCard({ product }: ProductCardProps) {
 
   return (
     <Link href={`/products/${product.slug}`}>
-      <Card padding="none" hover className="h-full flex flex-col overflow-hidden">
+      <Card className="h-full flex flex-col overflow-hidden hover:shadow-lg transition-shadow">
         {/* Product Image */}
         <div className="relative w-full h-64 bg-gray-100">
           <Image
@@ -38,15 +38,14 @@ export function ProductCard({ product }: ProductCardProps) {
           />
           {product.inventory < 10 && product.inventory > 0 && (
             <Badge
-              variant="warning"
-              className="absolute top-3 right-3"
+              className="absolute top-3 right-3 bg-yellow-100 text-yellow-800 hover:bg-yellow-100/80"
             >
               Low Stock
             </Badge>
           )}
           {product.inventory === 0 && (
             <Badge
-              variant="danger"
+              variant="destructive"
               className="absolute top-3 right-3"
             >
               Out of Stock
@@ -57,7 +56,7 @@ export function ProductCard({ product }: ProductCardProps) {
         {/* Product Info */}
         <div className="p-4 flex flex-col flex-grow">
           <div className="flex-grow">
-            <Badge variant="info" size="sm" className="mb-2 capitalize">
+            <Badge className="mb-2 capitalize bg-blue-100 text-blue-800 hover:bg-blue-100/80">
               {product.category}
             </Badge>
             <h3 className="font-semibold text-lg text-gray-900 mb-2 line-clamp-2">
