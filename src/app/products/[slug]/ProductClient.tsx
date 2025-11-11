@@ -5,8 +5,7 @@
 'use client';
 
 import { useState } from 'react';
-import { useRouter } from 'next/navigation';
-import { ShoppingCart, ArrowLeft, Check } from 'lucide-react';
+import { ShoppingCart, Check } from 'lucide-react';
 import { Button } from '@/components/ui';
 import type { Product } from '@/types';
 import { useCartStore } from '@/store/cart';
@@ -16,7 +15,6 @@ interface ProductClientProps {
 }
 
 export function ProductClient({ product }: ProductClientProps) {
-  const router = useRouter();
   const addItem = useCartStore((state) => state.addItem);
   const [quantity, setQuantity] = useState(1);
   const [isAdded, setIsAdded] = useState(false);
@@ -29,15 +27,6 @@ export function ProductClient({ product }: ProductClientProps) {
 
   return (
     <>
-      {/* Back Button */}
-      <button
-        onClick={() => router.back()}
-        className="flex items-center space-x-2 text-gray-600 hover:text-blue-600 mb-6 transition-colors"
-      >
-        <ArrowLeft className="h-5 w-5" />
-        <span>Back to Products</span>
-      </button>
-
       {/* Inventory Status */}
       <div className="mb-6">
         {product.inventory > 0 ? (

@@ -47,14 +47,16 @@ export function Header() {
           {/* Cart */}
           <Link
             href="/cart"
-            className="relative flex items-center space-x-2 text-gray-700 hover:text-blue-600 transition-colors"
+            className="flex items-center space-x-2 text-gray-700 hover:text-blue-600 transition-colors"
           >
-            <ShoppingCart className="h-6 w-6" />
-            {totalItems > 0 && (
-              <Badge variant="destructive" className="absolute -top-2 -right-2">
-                {totalItems}
-              </Badge>
-            )}
+            <div className="relative">
+              <ShoppingCart className="h-6 w-6" />
+              {totalItems > 0 && (
+                <Badge variant="destructive" className="absolute -top-2 -right-2 h-5 min-w-5 flex items-center justify-center p-0 px-1">
+                  {totalItems}
+                </Badge>
+              )}
+            </div>
             <span className="hidden sm:inline font-medium">Cart</span>
           </Link>
         </div>

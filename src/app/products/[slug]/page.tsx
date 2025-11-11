@@ -10,6 +10,7 @@ import { Button, Badge } from '@/components/ui';
 import { fetchProductById, transformProduct } from '@/lib/api/products';
 import { formatCurrency } from '@/lib/utils/format';
 import { ProductClient } from './ProductClient';
+import { BackButton } from './BackButton';
 
 interface ProductPageProps {
   params: Promise<{ slug: string }>;
@@ -43,7 +44,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
 
     return (
       <Container className="py-8">
-        <ProductClient product={product} />
+        <BackButton />
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* Product Image */}
@@ -112,7 +113,8 @@ export default async function ProductPage({ params }: ProductPageProps) {
               </ul>
             </div>
 
-            {/* Interactive elements are in ProductClient */}
+            {/* Interactive elements */}
+            <ProductClient product={product} />
           </div>
         </div>
       </Container>
