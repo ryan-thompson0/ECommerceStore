@@ -7,7 +7,6 @@
 import Link from 'next/link';
 import { ShoppingCart, Store } from 'lucide-react';
 import { useCartStore } from '@/store/cart';
-import { Badge } from '@/components/ui';
 
 export function Header() {
   const totalItems = useCartStore((state) => state.totalItems);
@@ -49,12 +48,12 @@ export function Header() {
             href="/cart"
             className="flex items-center space-x-2 text-gray-700 hover:text-blue-600 transition-colors"
           >
-            <div className="relative">
+            <div className="relative inline-flex">
               <ShoppingCart className="h-6 w-6" />
               {totalItems > 0 && (
-                <Badge variant="destructive" className="absolute -top-2 -right-2 h-5 min-w-5 flex items-center justify-center p-0 px-1">
+                <span className="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-red-600 text-[10px] font-bold text-white">
                   {totalItems}
-                </Badge>
+                </span>
               )}
             </div>
             <span className="hidden sm:inline font-medium">Cart</span>
