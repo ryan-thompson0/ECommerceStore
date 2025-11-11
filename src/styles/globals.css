@@ -1,0 +1,19 @@
+@import "tailwindcss";
+
+:root {
+  --background: 0 0% 100%;
+  --foreground: 222.2 84% 4.9%;
+}
+
+body {
+  background-color: white;
+  color: rgb(17 24 39);
+}
+
+* {
+  border-color: rgb(229 231 235);
+}
+
+.text-balance {
+  text-wrap: balance;
+}
