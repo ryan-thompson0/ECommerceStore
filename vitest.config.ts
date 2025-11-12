@@ -23,6 +23,7 @@ export default defineConfig({
         '**/*.config.*',
         '**/mockData/',
         'src/app/**', // Exclude Next.js app directory (tested with E2E)
+        '**/.next/**',
       ],
     },
   },

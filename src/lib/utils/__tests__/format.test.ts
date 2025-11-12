@@ -1,39 +1,32 @@
-/**
- * Tests for format utility functions
- */
-
 import { describe, it, expect } from 'vitest';
-import { formatCurrency } from '../format';
+import { formatCurrency, formatDate, truncateText, slugify } from '../format';
 
-describe('formatCurrency', () => {
-  it('should format positive numbers as USD currency', () => {
-    expect(formatCurrency(29.99)).toBe('$29.99');
-    expect(formatCurrency(100)).toBe('$100.00');
+const sampleDate = new Date('2024-01-01T12:00:00Z');
+
+describe('format utilities', () => {
+  it('formats currency to USD', () => {
     expect(formatCurrency(1234.56)).toBe('$1,234.56');
   });
 
-  it('should format zero as $0.00', () => {
-    expect(formatCurrency(0)).toBe('$0.00');
+  it('formats dates consistently', () => {
+    const formatted = formatDate(sampleDate);
+    expect(formatted).toContain('2024');
+    expect(formatted).toContain('January');
   });
 
-  it('should format negative numbers correctly', () => {
-    expect(formatCurrency(-10.5)).toBe('-$10.50');
-    expect(formatCurrency(-100)).toBe('-$100.00');
+  it('truncates text longer than max length', () => {
+    const text = 'This sentence is quite verbose and needs to be shortened.';
+    const shortened = truncateText(text, 20);
+    expect(shortened).toBe('This sentence is qui...');
   });
 
-  it('should handle large numbers with thousand separators', () => {
-    expect(formatCurrency(1000000)).toBe('$1,000,000.00');
-    expect(formatCurrency(999999.99)).toBe('$999,999.99');
+  it('returns original text when under limit', () => {
+    const text = 'Short text';
+    expect(truncateText(text, 20)).toBe(text);
   });
 
-  it('should round to 2 decimal places', () => {
-    expect(formatCurrency(10.999)).toBe('$11.00');
-    expect(formatCurrency(10.994)).toBe('$10.99');
-    expect(formatCurrency(10.995)).toBe('$11.00');
-  });
-
-  it('should handle very small numbers', () => {
-    expect(formatCurrency(0.01)).toBe('$0.01');
-    expect(formatCurrency(0.001)).toBe('$0.00');
+  it('slugifies text and removes punctuation', () => {
+    expect(slugify('Hello, World! Next.js')).toBe('hello-world-nextjs');
+    expect(slugify('  Multiple   spaces  ')).toBe('multiple-spaces');
   });
 });

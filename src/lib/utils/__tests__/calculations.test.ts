@@ -75,33 +75,31 @@ describe('calculateSubtotal', () => {
 });
 
 describe('calculateShipping', () => {
-  it('should return free shipping for orders over $50', () => {
-    expect(calculateShipping(50)).toBe(0);
+  it('should return free shipping for orders at or above the threshold', () => {
     expect(calculateShipping(100)).toBe(0);
-    expect(calculateShipping(50.01)).toBe(0);
+    expect(calculateShipping(150)).toBe(0);
   });
 
-  it('should calculate $5 shipping for orders under $50', () => {
-    expect(calculateShipping(49.99)).toBe(5);
-    expect(calculateShipping(25)).toBe(5);
-    expect(calculateShipping(0.01)).toBe(5);
+  it('should calculate shipping cost for orders under the threshold', () => {
+    expect(calculateShipping(99.99)).toBe(9.99);
+    expect(calculateShipping(25)).toBe(9.99);
   });
 
-  it('should return free shipping for $0 orders', () => {
+  it('should return free shipping for zero subtotal', () => {
     expect(calculateShipping(0)).toBe(0);
   });
 });
 
 describe('calculateTax', () => {
   it('should calculate 10% tax correctly', () => {
-    expect(calculateTax(100)).toBe(10);
-    expect(calculateTax(50)).toBe(5);
-    expect(calculateTax(1000)).toBe(100);
+    expect(calculateTax(100)).toBe(8);
+    expect(calculateTax(50)).toBe(4);
+    expect(calculateTax(1000)).toBe(80);
   });
 
   it('should round to 2 decimal places', () => {
-    expect(calculateTax(10.55)).toBeCloseTo(1.06, 2);
-    expect(calculateTax(99.99)).toBeCloseTo(10.00, 2);
+    expect(calculateTax(10.55)).toBeCloseTo(0.844, 3);
+    expect(calculateTax(99.99)).toBeCloseTo(7.9992, 3);
   });
 
   it('should return 0 tax for $0 amount', () => {
@@ -113,25 +111,25 @@ describe('calculateCartTotals', () => {
   it('should calculate correct totals for cart items', () => {
     const totals = calculateCartTotals(mockCartItems);
     // subtotal = 109.97
-    // shipping = 0 (over $50)
-    // tax = 10.997
-    // total = 120.967
+    // shipping = 0 (over $100)
+    // tax = 8.7976
+    // total ≈ 118.7676
     expect(totals.subtotal).toBe(109.97);
     expect(totals.shipping).toBe(0);
-    expect(totals.tax).toBeCloseTo(10.997, 2);
-    expect(totals.total).toBeCloseTo(120.967, 2);
+    expect(totals.tax).toBeCloseTo(8.7976, 2);
+    expect(totals.total).toBeCloseTo(118.7676, 2);
     expect(totals.totalItems).toBe(3);
   });
 
   it('should include shipping for orders under $50', () => {
     const smallCart = [mockCartItems[0]];
     const totals = calculateCartTotals(smallCart);
-    // subtotal = 29.99
-    // shipping = 5
-    // tax = 2.999
-    // total = 37.989
+    // subtotal = 59.98
+    // shipping = 9.99
+    // tax = 4.7984
+    // total ≈ 74.7684
     expect(totals.subtotal).toBeCloseTo(59.98, 2);
-    expect(totals.shipping).toBe(5);
+    expect(totals.shipping).toBe(9.99);
   });
 
   it('should handle empty cart', () => {

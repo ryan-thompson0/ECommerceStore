@@ -141,7 +141,7 @@ export function transformProduct(fakeStoreProduct: FakeStoreProduct) {
 /**
  * Creates a URL-friendly slug from product title and ID
  */
-function createSlug(title: string, id: number): string {
+export function createSlug(title: string, id: number): string {
   const slug = title
     .toLowerCase()
     .replace(/[^\w\s-]/g, '')
@@ -154,7 +154,7 @@ function createSlug(title: string, id: number): string {
 /**
  * Generates feature list from product description
  */
-function generateFeatures(product: FakeStoreProduct): string[] {
+export function generateFeatures(product: FakeStoreProduct): string[] {
   // Split description into sentences and take first 3-4 as features
   const sentences = product.description
     .split('.')
