@@ -110,13 +110,13 @@ export function ProductCard({ product }: ProductCardProps) {
               </span>
             </div>
             <Button
-              size="lg"
+              size="default"
               onClick={handleAddToCart}
               disabled={product.inventory === 0}
               className="flex items-center space-x-2 bg-gradient-primary hover:shadow-glow-lg hover:scale-105 transition-all duration-300 border-0 shadow-colored group/button"
             >
-              <ShoppingCart className="h-5 w-5 group-hover/button:rotate-12 transition-transform duration-300" />
-              <span className="font-semibold">Add to Cart</span>
+              <ShoppingCart className="h-4 w-4 group-hover/button:rotate-12 transition-transform duration-300" />
+              <span className="font-medium">Add to Cart</span>
             </Button>
           </div>
         </div>
