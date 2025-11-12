@@ -105,7 +105,7 @@ export function ProductCard({ product }: ProductCardProps) {
               <span className="text-xs text-muted-foreground font-medium uppercase tracking-wider">
                 Price
               </span>
-              <span className="text-3xl font-black text-primary gradient-text">
+              <span className="text-2xl font-bold text-primary gradient-text">
                 {formatCurrency(product.price)}
               </span>
             </div>
