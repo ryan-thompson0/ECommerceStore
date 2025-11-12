@@ -1,15 +1,17 @@
 /**
- * Contact form component with validation
+ * Contact form component with Zod validation
  */
 
 'use client';
 
 import { useState } from 'react';
+import { ZodError } from 'zod';
 import { Button } from '@/components/ui';
 import { Send, Check } from 'lucide-react';
+import { contactFormSchema, type ContactFormData } from '@/lib/validations/contact';
 
 export function ContactForm() {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<ContactFormData>({
     name: '',
     email: '',
     subject: '',
@@ -18,37 +20,14 @@ export function ContactForm() {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
 
-  const validateForm = () => {
-    const newErrors: Record<string, string> = {};
-
-    if (!formData.name.trim()) {
-      newErrors.name = 'Name is required';
-    }
-
-    if (!formData.email.trim()) {
-      newErrors.email = 'Email is required';
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      newErrors.email = 'Please enter a valid email';
-    }
-
-    if (!formData.subject.trim()) {
-      newErrors.subject = 'Subject is required';
-    }
-
-    if (!formData.message.trim()) {
-      newErrors.message = 'Message is required';
-    } else if (formData.message.trim().length < 10) {
-      newErrors.message = 'Message must be at least 10 characters';
-    }
-
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
-
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    setErrors({});
 
-    if (validateForm()) {
+    try {
+      // Validate form data with Zod
+      contactFormSchema.parse(formData);
+
       // In a real app, this would send data to an API
       // For production, integrate with error logging service (e.g., Sentry, LogRocket)
       setIsSubmitted(true);
@@ -58,6 +37,15 @@ export function ContactForm() {
         setFormData({ name: '', email: '', subject: '', message: '' });
         setIsSubmitted(false);
       }, 3000);
+    } catch (error) {
+      if (error instanceof ZodError) {
+        const newErrors: Record<string, string> = {};
+        error.issues.forEach((issue) => {
+          const field = issue.path[0] as string;
+          newErrors[field] = issue.message;
+        });
+        setErrors(newErrors);
+      }
     }
   };
 
@@ -90,13 +78,17 @@ export function ContactForm() {
             name="name"
             value={formData.name}
             onChange={handleChange}
+            aria-invalid={!!errors.name}
+            aria-describedby={errors.name ? 'name-error' : undefined}
             className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 bg-background text-foreground transition-all duration-300 ${
               errors.name ? 'border-red-500' : 'border-border'
             }`}
             placeholder="Your name"
           />
           {errors.name && (
-            <p className="text-red-500 text-sm mt-1">{errors.name}</p>
+            <p id="name-error" className="text-red-500 text-sm mt-1" role="alert">
+              {errors.name}
+            </p>
           )}
         </div>
 
@@ -111,13 +103,17 @@ export function ContactForm() {
             name="email"
             value={formData.email}
             onChange={handleChange}
+            aria-invalid={!!errors.email}
+            aria-describedby={errors.email ? 'email-error' : undefined}
             className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 bg-background text-foreground transition-all duration-300 ${
               errors.email ? 'border-red-500' : 'border-border'
             }`}
             placeholder="your.email@example.com"
           />
           {errors.email && (
-            <p className="text-red-500 text-sm mt-1">{errors.email}</p>
+            <p id="email-error" className="text-red-500 text-sm mt-1" role="alert">
+              {errors.email}
+            </p>
           )}
         </div>
 
@@ -132,13 +128,17 @@ export function ContactForm() {
             name="subject"
             value={formData.subject}
             onChange={handleChange}
+            aria-invalid={!!errors.subject}
+            aria-describedby={errors.subject ? 'subject-error' : undefined}
             className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 bg-background text-foreground transition-all duration-300 ${
               errors.subject ? 'border-red-500' : 'border-border'
             }`}
             placeholder="How can we help?"
           />
           {errors.subject && (
-            <p className="text-red-500 text-sm mt-1">{errors.subject}</p>
+            <p id="subject-error" className="text-red-500 text-sm mt-1" role="alert">
+              {errors.subject}
+            </p>
           )}
         </div>
 
@@ -153,13 +153,17 @@ export function ContactForm() {
             value={formData.message}
             onChange={handleChange}
             rows={6}
+            aria-invalid={!!errors.message}
+            aria-describedby={errors.message ? 'message-error' : undefined}
             className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 bg-background text-foreground transition-all duration-300 resize-none ${
               errors.message ? 'border-red-500' : 'border-border'
             }`}
             placeholder="Tell us more about your inquiry..."
           />
           {errors.message && (
-            <p className="text-red-500 text-sm mt-1">{errors.message}</p>
+            <p id="message-error" className="text-red-500 text-sm mt-1" role="alert">
+              {errors.message}
+            </p>
           )}
         </div>
 

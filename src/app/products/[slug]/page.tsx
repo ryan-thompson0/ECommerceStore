@@ -1,7 +1,9 @@
 /**
  * Product detail page (Server Component)
+ * Includes SEO metadata and structured data
  */
 
+import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Star, Check } from 'lucide-react';
@@ -9,11 +11,48 @@ import { Container } from '@/components/layout';
 import { Button, Badge } from '@/components/ui';
 import { fetchProductById, transformProduct } from '@/lib/api/products';
 import { formatCurrency } from '@/lib/utils/format';
+import { generateProductMetadata } from '@/lib/seo/metadata';
+import {
+  generateProductSchema,
+  generateBreadcrumbSchema,
+  StructuredData,
+} from '@/lib/seo/structured-data';
 import { ProductClient } from './ProductClient';
 import { BackButton } from './BackButton';
 
 interface ProductPageProps {
   params: Promise<{ slug: string }>;
+}
+
+/**
+ * Generates dynamic metadata for product pages
+ */
+export async function generateMetadata({
+  params,
+}: ProductPageProps): Promise<Metadata> {
+  try {
+    const resolvedParams = await params;
+    const idMatch = resolvedParams.slug.match(/-(\d+)$/);
+
+    if (!idMatch) {
+      return {
+        title: 'Product Not Found',
+        description: 'The requested product could not be found.',
+      };
+    }
+
+    const productId = parseInt(idMatch[1], 10);
+    const productData = await fetchProductById(productId);
+    const product = transformProduct(productData);
+
+    return generateProductMetadata(product);
+  } catch (error) {
+    console.error('Error generating metadata:', error);
+    return {
+      title: 'Product Error',
+      description: 'Unable to load product information.',
+    };
+  }
 }
 
 export default async function ProductPage({ params }: ProductPageProps) {
@@ -42,11 +81,24 @@ export default async function ProductPage({ params }: ProductPageProps) {
     const productData = await fetchProductById(productId);
     const product = transformProduct(productData);
 
-    return (
-      <Container className="py-8">
-        <BackButton />
+    // Generate breadcrumbs for structured data
+    const breadcrumbs = [
+      { name: 'Home', url: '/' },
+      { name: 'Products', url: '/' },
+      { name: product.category, url: `/?category=${product.category}` },
+      { name: product.name, url: `/products/${resolvedParams.slug}` },
+    ];
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+    return (
+      <>
+        {/* Structured Data (JSON-LD) */}
+        <StructuredData data={generateProductSchema(product)} />
+        <StructuredData data={generateBreadcrumbSchema(breadcrumbs)} />
+
+        <Container className="py-8">
+          <BackButton />
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* Product Image */}
           <div className="relative h-96 lg:h-[600px] rounded-lg overflow-hidden bg-muted">
             <Image
@@ -116,8 +168,9 @@ export default async function ProductPage({ params }: ProductPageProps) {
             {/* Interactive elements */}
             <ProductClient product={product} />
           </div>
-        </div>
-      </Container>
+          </div>
+        </Container>
+      </>
     );
   } catch (error) {
     console.error('Error loading product:', error);
