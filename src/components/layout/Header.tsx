@@ -27,7 +27,7 @@ export function Header() {
                 <div className="absolute inset-0 bg-gradient-primary blur-lg opacity-50 group-hover:opacity-75 transition-opacity duration-300" />
                 <Store className="h-9 w-9 text-primary relative z-10 group-hover:rotate-12 transition-transform duration-300" />
               </div>
-              <span className="text-2xl font-black bg-gradient-primary bg-clip-text text-transparent group-hover:animate-pulse-glow">
+              <span className="text-2xl font-black text-primary gradient-text group-hover:animate-pulse-glow">
                 ShopHub
               </span>
             </Link>

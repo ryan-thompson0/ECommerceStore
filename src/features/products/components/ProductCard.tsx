@@ -72,9 +72,9 @@ export function ProductCard({ product }: ProductCardProps) {
           <div className="flex-grow space-y-3">
             {/* Category Badge with Gradient */}
             <div className="flex items-center justify-between">
-              <Badge className="capitalize bg-gradient-primary text-white border-0 shadow-colored hover:shadow-glow transition-shadow duration-300">
+              <div className="capitalize inline-flex items-center rounded-md px-2.5 py-0.5 text-xs font-semibold bg-gradient-primary text-white border-0 shadow-colored hover:shadow-glow transition-shadow duration-300">
                 {product.category}
-              </Badge>
+              </div>
 
               {/* Rating with Enhanced Styling */}
               <div className="flex items-center space-x-1 bg-gradient-to-r from-yellow-400/20 to-orange-400/20 px-3 py-1 rounded-full border border-yellow-400/30">
@@ -105,7 +105,7 @@ export function ProductCard({ product }: ProductCardProps) {
               <span className="text-xs text-muted-foreground font-medium uppercase tracking-wider">
                 Price
               </span>
-              <span className="text-3xl font-black bg-gradient-primary bg-clip-text text-transparent">
+              <span className="text-3xl font-black text-primary gradient-text">
                 {formatCurrency(product.price)}
               </span>
             </div>

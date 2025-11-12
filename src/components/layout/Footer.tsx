@@ -20,7 +20,7 @@ export function Footer() {
             {/* About */}
             <div className="space-y-4">
               <div className="flex items-center space-x-2">
-                <h3 className="text-xl font-bold bg-gradient-primary bg-clip-text text-transparent">
+                <h3 className="text-xl font-bold text-primary gradient-text">
                   About ShopHub
                 </h3>
                 <Sparkles className="h-5 w-5 text-primary animate-pulse" />
@@ -139,7 +139,7 @@ export function Footer() {
           {/* Copyright with Premium Styling */}
           <div className="border-t border-primary/20 mt-12 pt-8 text-center">
             <p className="text-muted-foreground text-sm">
-              &copy; {currentYear} <span className="font-bold bg-gradient-primary bg-clip-text text-transparent">ShopHub</span>. All rights reserved.
+              &copy; {currentYear} <span className="font-bold text-primary gradient-text">ShopHub</span>. All rights reserved.
             </p>
             <p className="text-muted-foreground text-xs mt-2">
               Built with Next.js, React, and TypeScript
