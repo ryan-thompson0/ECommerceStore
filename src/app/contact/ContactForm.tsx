@@ -50,7 +50,7 @@ export function ContactForm() {
 
     if (validateForm()) {
       // In a real app, this would send data to an API
-      console.log('Form submitted:', formData);
+      // For production, integrate with error logging service (e.g., Sentry, LogRocket)
       setIsSubmitted(true);
 
       // Reset form after 3 seconds

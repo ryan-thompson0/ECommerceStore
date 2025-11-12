@@ -61,16 +61,21 @@ export function CartItem({ item }: CartItemProps) {
 
         <div className="flex items-center justify-between mt-2">
           {/* Quantity Controls */}
-          <div className="flex items-center space-x-2">
+          <div className="flex items-center space-x-2" role="group" aria-label="Quantity controls">
             <Button
               size="sm"
               variant="outline"
               onClick={() => handleQuantityChange(quantity - 1)}
+              aria-label={`Decrease quantity of ${product.name}`}
               className="p-1 h-8 w-8"
             >
-              <Minus className="h-4 w-4" />
+              <Minus className="h-4 w-4" aria-hidden="true" />
             </Button>
-            <span className="text-sm font-medium w-8 text-center text-foreground">
+            <span
+              className="text-sm font-medium w-8 text-center text-foreground"
+              aria-live="polite"
+              aria-label={`Quantity: ${quantity}`}
+            >
               {quantity}
             </span>
             <Button
@@ -78,24 +83,26 @@ export function CartItem({ item }: CartItemProps) {
               variant="outline"
               onClick={() => handleQuantityChange(quantity + 1)}
               disabled={quantity >= product.inventory}
+              aria-label={`Increase quantity of ${product.name}`}
               className="p-1 h-8 w-8"
             >
-              <Plus className="h-4 w-4" />
+              <Plus className="h-4 w-4" aria-hidden="true" />
             </Button>
           </div>
 
           {/* Price */}
           <div className="flex items-center space-x-4">
-            <span className="font-bold text-lg text-foreground">
+            <span className="font-bold text-lg text-foreground" aria-label={`Item total: ${formatCurrency(itemTotal)}`}>
               {formatCurrency(itemTotal)}
             </span>
             <Button
               size="sm"
               variant="destructive"
               onClick={() => removeItem(product.id)}
+              aria-label={`Remove ${product.name} from cart`}
               className="p-2"
             >
-              <Trash2 className="h-4 w-4" />
+              <Trash2 className="h-4 w-4" aria-hidden="true" />
             </Button>
           </div>
         </div>

@@ -33,7 +33,7 @@ export function Header() {
             </Link>
 
             {/* Navigation with Enhanced Styling */}
-            <nav className="hidden md:flex items-center space-x-2">
+            <nav className="hidden md:flex items-center space-x-2" aria-label="Main navigation">
               <Link
                 href="/"
                 className="relative px-4 py-2 text-foreground/80 hover:text-primary font-semibold transition-all duration-300 group overflow-hidden rounded-lg"
@@ -69,16 +69,20 @@ export function Header() {
               <Link
                 href="/cart"
                 className="flex items-center space-x-2 px-4 py-2 rounded-lg bg-primary text-white [background-image:var(--gradient-primary)] hover:shadow-glow-lg hover:scale-105 transition-all duration-300 group"
+                aria-label={`Shopping cart with ${totalItems} ${totalItems === 1 ? 'item' : 'items'}`}
               >
                 <div className="relative inline-flex">
-                  <ShoppingCart className="h-5 w-5 group-hover:rotate-12 transition-transform duration-300" />
+                  <ShoppingCart className="h-5 w-5 group-hover:rotate-12 transition-transform duration-300" aria-hidden="true" />
                   {totalItems > 0 && (
-                    <span className="absolute -top-2 -right-2 flex h-5 w-5 items-center justify-center rounded-full [background-image:var(--gradient-cosmic)] text-white text-[10px] font-bold shadow-glow animate-pulse-glow border border-white/30">
+                    <span
+                      className="absolute -top-2 -right-2 flex h-5 w-5 items-center justify-center rounded-full [background-image:var(--gradient-cosmic)] text-white text-[10px] font-bold shadow-glow animate-pulse-glow border border-white/30"
+                      aria-label={`${totalItems} items in cart`}
+                    >
                       {totalItems}
                     </span>
                   )}
                 </div>
-                <span className="hidden sm:inline font-bold">Cart</span>
+                <span className="hidden sm:inline font-bold" aria-hidden="true">Cart</span>
               </Link>
             </div>
           </div>

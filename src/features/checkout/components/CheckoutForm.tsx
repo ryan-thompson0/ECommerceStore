@@ -6,6 +6,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { ZodError } from 'zod';
 import { Input, Button, Card, Label } from '@/components/ui';
 import { useCartStore } from '@/store/cart';
 import { checkoutFormSchema } from '@/lib/validations/checkout';
@@ -83,12 +84,11 @@ export function CheckoutForm() {
       clearCart();
       router.push('/order-success');
     } catch (error) {
-      if (error instanceof Error && 'errors' in error) {
-        const zodError = error as { errors: Array<{ path: string[]; message: string }> };
+      if (error instanceof ZodError) {
         const newErrors: Record<string, string> = {};
-        zodError.errors.forEach((err) => {
-          const path = err.path.join('.');
-          newErrors[path] = err.message;
+        error.issues.forEach((issue) => {
+          const path = issue.path.join('.');
+          newErrors[path] = issue.message;
         });
         setErrors(newErrors);
       }
@@ -114,10 +114,14 @@ export function CheckoutForm() {
             onChange={handleInputChange}
             required
             placeholder="john@example.com"
+            aria-invalid={!!errors.email}
+            aria-describedby={errors.email ? 'email-error' : undefined}
             className={errors.email ? 'border-red-500' : ''}
           />
           {errors.email && (
-            <p className="text-sm text-red-600">{errors.email}</p>
+            <p id="email-error" className="text-sm text-red-600" role="alert">
+              {errors.email}
+            </p>
           )}
         </div>
       </Card>

@@ -3,7 +3,9 @@
  * Documentation: https://fakestoreapi.com/docs
  */
 
-const API_BASE_URL = 'https://fakestoreapi.com';
+import { env } from '@/lib/env';
+
+const API_BASE_URL = env.NEXT_PUBLIC_API_URL;
 
 /**
  * FakeStore API Product interface
@@ -40,7 +42,7 @@ export async function fetchProducts(limit?: number): Promise<FakeStoreProduct[]>
       throw new Error(`Failed to fetch products: ${response.statusText}`);
     }
 
-    return response.json();
+    return response.json() as Promise<FakeStoreProduct[]>;
   } catch (error) {
     console.error('Error fetching products:', error);
     throw error;
@@ -62,7 +64,7 @@ export async function fetchProductById(id: number): Promise<FakeStoreProduct> {
       throw new Error(`Failed to fetch product: ${response.statusText}`);
     }
 
-    return response.json();
+    return response.json() as Promise<FakeStoreProduct>;
   } catch (error) {
     console.error(`Error fetching product ${id}:`, error);
     throw error;
@@ -83,7 +85,7 @@ export async function fetchCategories(): Promise<string[]> {
       throw new Error(`Failed to fetch categories: ${response.statusText}`);
     }
 
-    return response.json();
+    return response.json() as Promise<string[]>;
   } catch (error) {
     console.error('Error fetching categories:', error);
     throw error;
@@ -110,7 +112,7 @@ export async function fetchProductsByCategory(
       throw new Error(`Failed to fetch products by category: ${response.statusText}`);
     }
 
-    return response.json();
+    return response.json() as Promise<FakeStoreProduct[]>;
   } catch (error) {
     console.error(`Error fetching products for category ${category}:`, error);
     throw error;
