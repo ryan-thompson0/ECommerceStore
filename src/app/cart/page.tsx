@@ -18,9 +18,9 @@ export default function CartPage() {
     return (
       <Container className="py-12">
         <div className="text-center">
-          <ShoppingBag className="h-24 w-24 text-gray-300 mx-auto mb-4" />
-          <h1 className="text-3xl font-bold mb-4">Your cart is empty</h1>
-          <p className="text-gray-600 mb-6">
+          <ShoppingBag className="h-24 w-24 text-gray-300 dark:text-gray-600 mx-auto mb-4" />
+          <h1 className="text-3xl font-bold mb-4 text-foreground">Your cart is empty</h1>
+          <p className="text-gray-600 dark:text-gray-400 mb-6">
             Add some products to your cart to get started!
           </p>
           <Link href="/">
@@ -33,7 +33,7 @@ export default function CartPage() {
 
   return (
     <Container className="py-8">
-      <h1 className="text-3xl font-bold mb-8">Shopping Cart</h1>
+      <h1 className="text-3xl font-bold mb-8 text-foreground">Shopping Cart</h1>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* Cart Items */}

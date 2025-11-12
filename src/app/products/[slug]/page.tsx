@@ -25,8 +25,8 @@ export default async function ProductPage({ params }: ProductPageProps) {
     return (
       <Container className="py-12">
         <div className="text-center">
-          <h1 className="text-3xl font-bold mb-4">Product Not Found</h1>
-          <p className="text-gray-600 mb-6">
+          <h1 className="text-3xl font-bold mb-4 text-foreground">Product Not Found</h1>
+          <p className="text-gray-600 dark:text-gray-400 mb-6">
             The product you're looking for doesn't exist.
           </p>
           <Link href="/">
@@ -48,7 +48,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* Product Image */}
-          <div className="relative h-96 lg:h-[600px] rounded-lg overflow-hidden bg-gray-100">
+          <div className="relative h-96 lg:h-[600px] rounded-lg overflow-hidden bg-gray-100 dark:bg-gray-800">
             <Image
               src={product.image}
               alt={product.name}
@@ -61,11 +61,11 @@ export default async function ProductPage({ params }: ProductPageProps) {
 
           {/* Product Info */}
           <div className="flex flex-col">
-            <Badge className="w-fit mb-3 capitalize bg-blue-100 text-blue-800 hover:bg-blue-100/80">
+            <Badge className="w-fit mb-3 capitalize bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 hover:bg-blue-100/80 dark:hover:bg-blue-900/80">
               {product.category}
             </Badge>
 
-            <h1 className="text-4xl font-bold text-gray-900 mb-4">
+            <h1 className="text-4xl font-bold text-foreground mb-4">
               {product.name}
             </h1>
 
@@ -78,36 +78,36 @@ export default async function ProductPage({ params }: ProductPageProps) {
                     className={`h-5 w-5 ${
                       i < Math.floor(product.rating)
                         ? 'fill-yellow-400 text-yellow-400'
-                        : 'text-gray-300'
+                        : 'text-gray-400 dark:text-gray-600'
                     }`}
                   />
                 ))}
               </div>
-              <span className="ml-2 text-gray-700">
+              <span className="ml-2 text-foreground">
                 {product.rating.toFixed(1)} ({product.reviewCount} reviews)
               </span>
             </div>
 
             {/* Price */}
             <div className="mb-6">
-              <span className="text-4xl font-bold text-blue-600">
+              <span className="text-4xl font-bold text-blue-600 dark:text-blue-400">
                 {formatCurrency(product.price)}
               </span>
             </div>
 
             {/* Description */}
-            <p className="text-gray-700 text-lg mb-6 leading-relaxed">
+            <p className="text-foreground text-lg mb-6 leading-relaxed">
               {product.description}
             </p>
 
             {/* Features */}
             <div className="mb-6">
-              <h3 className="font-semibold text-lg mb-3">Key Features:</h3>
+              <h3 className="font-semibold text-lg mb-3 text-foreground">Key Features:</h3>
               <ul className="space-y-2">
                 {product.features.map((feature, index) => (
                   <li key={index} className="flex items-start space-x-2">
-                    <Check className="h-5 w-5 text-green-600 mt-0.5 flex-shrink-0" />
-                    <span className="text-gray-700">{feature}</span>
+                    <Check className="h-5 w-5 text-green-600 dark:text-green-400 mt-0.5 flex-shrink-0" />
+                    <span className="text-foreground">{feature}</span>
                   </li>
                 ))}
               </ul>
@@ -125,8 +125,8 @@ export default async function ProductPage({ params }: ProductPageProps) {
     return (
       <Container className="py-12">
         <div className="text-center">
-          <h1 className="text-3xl font-bold mb-4">Unable to Load Product</h1>
-          <p className="text-gray-600 mb-6">
+          <h1 className="text-3xl font-bold mb-4 text-foreground">Unable to Load Product</h1>
+          <p className="text-gray-600 dark:text-gray-400 mb-6">
             We're having trouble loading this product. Please try again later.
           </p>
           <Link href="/">

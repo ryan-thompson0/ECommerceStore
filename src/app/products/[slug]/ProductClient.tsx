@@ -30,28 +30,28 @@ export function ProductClient({ product }: ProductClientProps) {
       {/* Inventory Status */}
       <div className="mb-6">
         {product.inventory > 0 ? (
-          <p className="text-green-600 font-medium">
+          <p className="text-green-600 dark:text-green-400 font-medium">
             In Stock ({product.inventory} available)
           </p>
         ) : (
-          <p className="text-red-600 font-medium">Out of Stock</p>
+          <p className="text-red-600 dark:text-red-400 font-medium">Out of Stock</p>
         )}
       </div>
 
       {/* Quantity Selector */}
       {product.inventory > 0 && (
         <div className="mb-6">
-          <label className="block text-sm font-medium text-gray-700 mb-2">
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
             Quantity:
           </label>
           <select
             value={quantity}
             onChange={(e) => setQuantity(Number(e.target.value))}
-            className="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="px-4 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400"
           >
             {Array.from({ length: Math.min(10, product.inventory) }, (_, i) => i + 1).map(
               (num) => (
-                <option key={num} value={num}>
+                <option key={num} value={num} className="bg-white dark:bg-gray-800 text-foreground">
                   {num}
                 </option>
               )

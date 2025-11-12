@@ -101,7 +101,7 @@ export function CheckoutForm() {
     <form onSubmit={handleSubmit} className="space-y-6">
       {/* Contact Information */}
       <Card className="p-6">
-        <h2 className="text-xl font-bold mb-4">Contact Information</h2>
+        <h2 className="text-xl font-bold mb-4 text-foreground">Contact Information</h2>
         <div className="space-y-2">
           <Label htmlFor="email">
             Email <span className="text-red-500">*</span>
@@ -124,7 +124,7 @@ export function CheckoutForm() {
 
       {/* Shipping Address */}
       <Card className="p-6">
-        <h2 className="text-xl font-bold mb-4">Shipping Address</h2>
+        <h2 className="text-xl font-bold mb-4 text-foreground">Shipping Address</h2>
         <div className="space-y-4">
           <div className="space-y-2">
             <Label htmlFor="fullName">
@@ -248,7 +248,7 @@ export function CheckoutForm() {
 
       {/* Payment Method */}
       <Card className="p-6">
-        <h2 className="text-xl font-bold mb-4">Payment Method</h2>
+        <h2 className="text-xl font-bold mb-4 text-foreground">Payment Method</h2>
         <div className="space-y-4">
           <div className="space-y-2">
             <Label htmlFor="paymentType">
@@ -259,11 +259,11 @@ export function CheckoutForm() {
               name="paymentMethod.type"
               value={formData.paymentMethod.type}
               onChange={handleInputChange}
-              className="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-base shadow-sm transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring md:text-sm"
+              className="flex h-9 w-full rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 px-3 py-1 text-base shadow-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 dark:focus-visible:ring-blue-400 md:text-sm"
             >
-              <option value="credit_card">Credit Card</option>
-              <option value="debit_card">Debit Card</option>
-              <option value="paypal">PayPal</option>
+              <option value="credit_card" className="bg-white dark:bg-gray-800 text-foreground">Credit Card</option>
+              <option value="debit_card" className="bg-white dark:bg-gray-800 text-foreground">Debit Card</option>
+              <option value="paypal" className="bg-white dark:bg-gray-800 text-foreground">PayPal</option>
             </select>
           </div>
 

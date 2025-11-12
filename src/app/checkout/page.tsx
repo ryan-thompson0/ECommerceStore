@@ -28,7 +28,7 @@ export default function CheckoutPage() {
 
   return (
     <Container className="py-8">
-      <h1 className="text-3xl font-bold mb-8">Checkout</h1>
+      <h1 className="text-3xl font-bold mb-8 text-foreground">Checkout</h1>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* Checkout Form */}
@@ -40,21 +40,21 @@ export default function CheckoutPage() {
         <div className="lg:col-span-1">
           <div className="sticky top-24">
             <Card className="p-6">
-              <h2 className="text-xl font-bold mb-4">Order Items</h2>
+              <h2 className="text-xl font-bold mb-4 text-foreground">Order Items</h2>
               <div className="space-y-3 max-h-96 overflow-y-auto">
                 {items.map((item) => (
                   <div
                     key={item.product.id}
-                    className="flex items-center space-x-3 pb-3 border-b last:border-b-0"
+                    className="flex items-center space-x-3 pb-3 border-b dark:border-gray-700 last:border-b-0"
                   >
-                    <div className="text-sm font-medium text-gray-600 w-8">
+                    <div className="text-sm font-medium text-gray-600 dark:text-gray-400 w-8">
                       {item.quantity}x
                     </div>
                     <div className="flex-grow">
-                      <p className="text-sm font-medium text-gray-900 line-clamp-1">
+                      <p className="text-sm font-medium text-gray-900 dark:text-gray-100 line-clamp-1">
                         {item.product.name}
                       </p>
-                      <p className="text-xs text-gray-500">
+                      <p className="text-xs text-gray-600 dark:text-gray-400">
                         ${item.product.price.toFixed(2)} each
                       </p>
                     </div>

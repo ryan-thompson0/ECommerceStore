@@ -31,10 +31,10 @@ export function CartItem({ item }: CartItemProps) {
   const itemTotal = product.price * quantity;
 
   return (
-    <div className="flex gap-4 p-4 bg-white rounded-lg shadow-sm border border-gray-200">
+    <div className="flex gap-4 p-4 bg-card rounded-lg shadow-sm border border-border">
       {/* Product Image */}
       <Link href={`/products/${product.slug}`} className="flex-shrink-0">
-        <div className="relative w-24 h-24 rounded-md overflow-hidden">
+        <div className="relative w-24 h-24 rounded-md overflow-hidden bg-gray-100 dark:bg-gray-800">
           <Image
             src={product.image}
             alt={product.name}
@@ -50,11 +50,11 @@ export function CartItem({ item }: CartItemProps) {
         <div>
           <Link
             href={`/products/${product.slug}`}
-            className="font-semibold text-gray-900 hover:text-blue-600 transition-colors"
+            className="font-semibold text-gray-900 dark:text-gray-100 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
           >
             {product.name}
           </Link>
-          <p className="text-sm text-gray-600 mt-1 line-clamp-2">
+          <p className="text-sm text-gray-600 dark:text-gray-400 mt-1 line-clamp-2">
             {product.description}
           </p>
         </div>
@@ -70,7 +70,7 @@ export function CartItem({ item }: CartItemProps) {
             >
               <Minus className="h-4 w-4" />
             </Button>
-            <span className="text-sm font-medium w-8 text-center">
+            <span className="text-sm font-medium w-8 text-center text-foreground">
               {quantity}
             </span>
             <Button
@@ -86,7 +86,7 @@ export function CartItem({ item }: CartItemProps) {
 
           {/* Price */}
           <div className="flex items-center space-x-4">
-            <span className="font-bold text-lg text-gray-900">
+            <span className="font-bold text-lg text-gray-900 dark:text-gray-100">
               {formatCurrency(itemTotal)}
             </span>
             <Button

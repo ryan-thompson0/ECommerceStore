@@ -5,6 +5,7 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import { Header, Footer } from '@/components/layout';
+import { ThemeProvider } from '@/components/theme-provider';
 import '@/styles/globals.css';
 
 const inter = Inter({
@@ -26,11 +27,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={inter.variable}>
-      <body className="min-h-screen flex flex-col bg-gray-50">
-        <Header />
-        <main className="flex-grow">{children}</main>
-        <Footer />
+    <html lang="en" className={inter.variable} suppressHydrationWarning>
+      <body className="min-h-screen flex flex-col">
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <Header />
+          <main className="flex-grow">{children}</main>
+          <Footer />
+        </ThemeProvider>
       </body>
     </html>
   );
