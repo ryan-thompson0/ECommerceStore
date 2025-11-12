@@ -3,6 +3,7 @@
  * Runs before all tests
  */
 
+import * as React from 'react';
 import '@testing-library/jest-dom';
 import { cleanup } from '@testing-library/react';
 import { afterEach } from 'vitest';
@@ -33,3 +34,11 @@ vi.mock('next/image', () => ({
     return props;
   },
 }));
+
+// Mock Next.js Link component so it renders children directly
+vi.mock('next/link', () => {
+  return {
+    __esModule: true,
+    default: ({ children }: { children: React.ReactNode }) => children,
+  };
+});

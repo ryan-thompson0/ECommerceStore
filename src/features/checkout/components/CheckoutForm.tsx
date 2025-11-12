@@ -13,7 +13,11 @@ import { checkoutFormSchema } from '@/lib/validations/checkout';
 import type { CheckoutFormData } from '@/types';
 import { Loader2 } from 'lucide-react';
 
-export function CheckoutForm() {
+interface CheckoutFormProps {
+  processingDelay?: number;
+}
+
+export function CheckoutForm({ processingDelay = 1500 }: CheckoutFormProps) {
   const router = useRouter();
   const clearCart = useCartStore((state) => state.clearCart);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -78,7 +82,7 @@ export function CheckoutForm() {
       checkoutFormSchema.parse(formData);
 
       // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 1500));
+      await new Promise((resolve) => setTimeout(resolve, processingDelay));
 
       // Clear cart and redirect to success page
       clearCart();
