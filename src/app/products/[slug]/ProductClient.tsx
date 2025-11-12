@@ -40,14 +40,14 @@ export function ProductClient({ product }: ProductClientProps) {
 
       {/* Quantity Selector */}
       {product.inventory > 0 && (
-        <div className="mb-6">
-          <label className="block text-sm font-medium text-foreground mb-2">
+        <div className="mb-8 animate-slide-up">
+          <label className="block text-sm font-bold text-foreground mb-3 uppercase tracking-wide">
             Quantity:
           </label>
           <select
             value={quantity}
             onChange={(e) => setQuantity(Number(e.target.value))}
-            className="px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-ring"
+            className="custom-select min-w-[120px] px-5 py-3 border border-border rounded-lg focus:outline-none bg-background text-foreground font-semibold text-lg shadow-sm hover:shadow-md"
           >
             {Array.from({ length: Math.min(10, product.inventory) }, (_, i) => i + 1).map(
               (num) => (
