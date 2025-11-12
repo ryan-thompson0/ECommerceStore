@@ -45,16 +45,16 @@ export default function CheckoutPage() {
                 {items.map((item) => (
                   <div
                     key={item.product.id}
-                    className="flex items-center space-x-3 pb-3 border-b dark:border-gray-700 last:border-b-0"
+                    className="flex items-center space-x-3 pb-3 border-b last:border-b-0"
                   >
-                    <div className="text-sm font-medium text-gray-600 dark:text-gray-400 w-8">
+                    <div className="text-sm font-medium text-muted-foreground w-8">
                       {item.quantity}x
                     </div>
                     <div className="flex-grow">
-                      <p className="text-sm font-medium text-gray-900 dark:text-gray-100 line-clamp-1">
+                      <p className="text-sm font-medium text-foreground line-clamp-1">
                         {item.product.name}
                       </p>
-                      <p className="text-xs text-gray-600 dark:text-gray-400">
+                      <p className="text-xs text-muted-foreground">
                         ${item.product.price.toFixed(2)} each
                       </p>
                     </div>

@@ -26,7 +26,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
       <Container className="py-12">
         <div className="text-center">
           <h1 className="text-3xl font-bold mb-4 text-foreground">Product Not Found</h1>
-          <p className="text-gray-600 dark:text-gray-400 mb-6">
+          <p className="text-muted-foreground mb-6">
             The product you're looking for doesn't exist.
           </p>
           <Link href="/">
@@ -48,7 +48,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* Product Image */}
-          <div className="relative h-96 lg:h-[600px] rounded-lg overflow-hidden bg-gray-100 dark:bg-gray-800">
+          <div className="relative h-96 lg:h-[600px] rounded-lg overflow-hidden bg-muted">
             <Image
               src={product.image}
               alt={product.name}
@@ -61,7 +61,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
 
           {/* Product Info */}
           <div className="flex flex-col">
-            <Badge className="w-fit mb-3 capitalize bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 hover:bg-blue-100/80 dark:hover:bg-blue-900/80">
+            <Badge className="w-fit mb-3 capitalize bg-blue-100 dark:bg-blue-900/50 text-blue-800 dark:text-blue-200 hover:bg-blue-100/80 dark:hover:bg-blue-900/60">
               {product.category}
             </Badge>
 
@@ -78,7 +78,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
                     className={`h-5 w-5 ${
                       i < Math.floor(product.rating)
                         ? 'fill-yellow-400 text-yellow-400'
-                        : 'text-gray-400 dark:text-gray-600'
+                        : 'text-muted-foreground/50'
                     }`}
                   />
                 ))}
@@ -90,7 +90,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
 
             {/* Price */}
             <div className="mb-6">
-              <span className="text-4xl font-bold text-blue-600 dark:text-blue-400">
+              <span className="text-4xl font-bold text-primary">
                 {formatCurrency(product.price)}
               </span>
             </div>
@@ -126,7 +126,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
       <Container className="py-12">
         <div className="text-center">
           <h1 className="text-3xl font-bold mb-4 text-foreground">Unable to Load Product</h1>
-          <p className="text-gray-600 dark:text-gray-400 mb-6">
+          <p className="text-muted-foreground mb-6">
             We're having trouble loading this product. Please try again later.
           </p>
           <Link href="/">

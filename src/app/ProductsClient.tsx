@@ -58,7 +58,7 @@ export function ProductsClient({ products, categories }: ProductsClientProps) {
       />
 
       <div className="mb-4">
-        <p className="text-gray-600 dark:text-gray-400">
+        <p className="text-muted-foreground">
           Showing <span className="font-semibold">{filteredAndSortedProducts.length}</span> products
         </p>
       </div>

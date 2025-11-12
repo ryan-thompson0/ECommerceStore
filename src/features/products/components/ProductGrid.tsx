@@ -13,7 +13,7 @@ export function ProductGrid({ products }: ProductGridProps) {
   if (products.length === 0) {
     return (
       <div className="text-center py-12">
-        <p className="text-gray-500 dark:text-gray-400 text-lg">No products found.</p>
+        <p className="text-muted-foreground text-lg">No products found.</p>
       </div>
     );
   }

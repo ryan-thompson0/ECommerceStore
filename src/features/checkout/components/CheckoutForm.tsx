@@ -259,11 +259,11 @@ export function CheckoutForm() {
               name="paymentMethod.type"
               value={formData.paymentMethod.type}
               onChange={handleInputChange}
-              className="flex h-9 w-full rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 px-3 py-1 text-base shadow-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 dark:focus-visible:ring-blue-400 md:text-sm"
+              className="flex h-9 w-full rounded-md border px-3 py-1 text-base shadow-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring md:text-sm"
             >
-              <option value="credit_card" className="bg-white dark:bg-gray-800 text-foreground">Credit Card</option>
-              <option value="debit_card" className="bg-white dark:bg-gray-800 text-foreground">Debit Card</option>
-              <option value="paypal" className="bg-white dark:bg-gray-800 text-foreground">PayPal</option>
+              <option value="credit_card">Credit Card</option>
+              <option value="debit_card">Debit Card</option>
+              <option value="paypal">PayPal</option>
             </select>
           </div>
 

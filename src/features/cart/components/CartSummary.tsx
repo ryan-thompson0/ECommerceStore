@@ -21,37 +21,37 @@ export function CartSummary() {
       <h2 className="text-xl font-bold mb-4 text-foreground">Order Summary</h2>
 
       <div className="space-y-3 mb-4">
-        <div className="flex justify-between text-gray-700 dark:text-gray-300">
+        <div className="flex justify-between text-foreground">
           <span>Subtotal:</span>
           <span>{formatCurrency(subtotal)}</span>
         </div>
-        <div className="flex justify-between text-gray-700 dark:text-gray-300">
+        <div className="flex justify-between text-foreground">
           <span>Tax:</span>
           <span>{formatCurrency(tax)}</span>
         </div>
-        <div className="flex justify-between text-gray-700 dark:text-gray-300">
+        <div className="flex justify-between text-foreground">
           <span>Shipping:</span>
           <span className={shipping === 0 ? 'text-green-600 dark:text-green-400 font-medium' : ''}>
             {shipping === 0 ? 'FREE' : formatCurrency(shipping)}
           </span>
         </div>
-        <div className="border-t dark:border-gray-700 pt-3">
+        <div className="border-t pt-3">
           <div className="flex justify-between text-lg font-bold">
             <span className="text-foreground">Total:</span>
-            <span className="text-blue-600 dark:text-blue-400">{formatCurrency(total)}</span>
+            <span className="text-primary">{formatCurrency(total)}</span>
           </div>
         </div>
       </div>
 
       {/* Free Shipping Message */}
       {!qualifiesForFreeShipping && items.length > 0 && (
-        <div className="bg-blue-50 dark:bg-blue-950 text-blue-700 dark:text-blue-300 text-sm p-3 rounded-lg mb-4 border border-blue-200 dark:border-blue-800">
+        <div className="bg-blue-50 dark:bg-blue-950/50 text-blue-700 dark:text-blue-300 text-sm p-3 rounded-lg mb-4 border border-blue-200 dark:border-blue-800/50">
           Add {formatCurrency(remainingForFreeShipping)} more to get FREE shipping!
         </div>
       )}
 
       {qualifiesForFreeShipping && items.length > 0 && (
-        <div className="bg-green-50 dark:bg-green-950 text-green-700 dark:text-green-300 text-sm p-3 rounded-lg mb-4 border border-green-200 dark:border-green-800">
+        <div className="bg-green-50 dark:bg-green-950/50 text-green-700 dark:text-green-300 text-sm p-3 rounded-lg mb-4 border border-green-200 dark:border-green-800/50">
           You qualify for FREE shipping! 🎉
         </div>
       )}

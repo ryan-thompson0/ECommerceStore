@@ -13,7 +13,7 @@ export function Header() {
   const totalItems = useCartStore((state) => state.totalItems);
 
   return (
-    <header className="sticky top-0 z-50 bg-background border-b shadow-sm">
+    <header className="sticky top-0 z-50 border-b shadow-sm" style={{ backgroundColor: 'hsl(var(--background))' }}>
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
           {/* Logo */}

@@ -18,9 +18,9 @@ export default function CartPage() {
     return (
       <Container className="py-12">
         <div className="text-center">
-          <ShoppingBag className="h-24 w-24 text-gray-300 dark:text-gray-600 mx-auto mb-4" />
+          <ShoppingBag className="h-24 w-24 text-muted-foreground/50 mx-auto mb-4" />
           <h1 className="text-3xl font-bold mb-4 text-foreground">Your cart is empty</h1>
-          <p className="text-gray-600 dark:text-gray-400 mb-6">
+          <p className="text-muted-foreground mb-6">
             Add some products to your cart to get started!
           </p>
           <Link href="/">

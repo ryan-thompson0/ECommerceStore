@@ -20,10 +20,10 @@ export default async function HomePage() {
     return (
       <Container className="py-8">
         <div className="mb-8">
-          <h1 className="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-2">
+          <h1 className="text-4xl font-bold text-foreground mb-2">
             Discover Amazing Products
           </h1>
-          <p className="text-gray-600 dark:text-gray-400 text-lg">
+          <p className="text-muted-foreground text-lg">
             Browse our collection of high-quality products at competitive prices
           </p>
         </div>
@@ -37,10 +37,10 @@ export default async function HomePage() {
     return (
       <Container className="py-8">
         <div className="text-center">
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-4">
+          <h1 className="text-3xl font-bold text-foreground mb-4">
             Unable to Load Products
           </h1>
-          <p className="text-gray-600 dark:text-gray-400 mb-6">
+          <p className="text-muted-foreground mb-6">
             We're having trouble loading products. Please try again later.
           </p>
         </div>

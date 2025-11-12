@@ -15,14 +15,14 @@ export default function OrderSuccessPage() {
 
         <h1 className="text-4xl font-bold mb-4 text-foreground">Order Placed Successfully!</h1>
 
-        <p className="text-gray-600 dark:text-gray-400 text-lg mb-8">
+        <p className="text-muted-foreground text-lg mb-8">
           Thank you for your purchase. Your order has been received and is being processed.
           You will receive a confirmation email shortly.
         </p>
 
-        <div className="bg-blue-50 dark:bg-blue-950 border border-blue-200 dark:border-blue-800 rounded-lg p-6 mb-8">
+        <div className="bg-blue-50 dark:bg-blue-950/50 border border-blue-200 dark:border-blue-800/50 rounded-lg p-6 mb-8">
           <h2 className="font-semibold text-lg mb-2 text-foreground">What's Next?</h2>
-          <ul className="text-left text-gray-700 dark:text-gray-300 space-y-2">
+          <ul className="text-left text-foreground space-y-2">
             <li>• You'll receive an order confirmation email</li>
             <li>• We'll send you shipping updates as your order progresses</li>
             <li>• Your items will arrive within 5-7 business days</li>

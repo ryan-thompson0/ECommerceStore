@@ -9,13 +9,13 @@ export function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-gray-900 dark:bg-gray-950 text-white mt-auto border-t border-gray-800 dark:border-gray-900">
+    <footer className="bg-secondary/50 mt-auto border-t">
       <div className="container mx-auto px-4 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* About */}
           <div>
-            <h3 className="text-lg font-semibold mb-4">About ShopHub</h3>
-            <p className="text-gray-400 dark:text-gray-500 text-sm">
+            <h3 className="text-lg font-semibold mb-4 text-foreground">About ShopHub</h3>
+            <p className="text-muted-foreground text-sm">
               Your one-stop destination for quality products at great prices.
               Built with modern web technologies.
             </p>
@@ -23,20 +23,20 @@ export function Footer() {
 
           {/* Quick Links */}
           <div>
-            <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
+            <h3 className="text-lg font-semibold mb-4 text-foreground">Quick Links</h3>
             <ul className="space-y-2">
               <li>
-                <Link href="/" className="text-gray-400 dark:text-gray-500 hover:text-white transition-colors text-sm">
+                <Link href="/" className="text-muted-foreground hover:text-foreground transition-colors text-sm">
                   Products
                 </Link>
               </li>
               <li>
-                <Link href="/about" className="text-gray-400 dark:text-gray-500 hover:text-white transition-colors text-sm">
+                <Link href="/about" className="text-muted-foreground hover:text-foreground transition-colors text-sm">
                   About Us
                 </Link>
               </li>
               <li>
-                <Link href="/contact" className="text-gray-400 dark:text-gray-500 hover:text-white transition-colors text-sm">
+                <Link href="/contact" className="text-muted-foreground hover:text-foreground transition-colors text-sm">
                   Contact
                 </Link>
               </li>
@@ -45,20 +45,20 @@ export function Footer() {
 
           {/* Customer Service */}
           <div>
-            <h3 className="text-lg font-semibold mb-4">Customer Service</h3>
+            <h3 className="text-lg font-semibold mb-4 text-foreground">Customer Service</h3>
             <ul className="space-y-2">
               <li>
-                <Link href="#" className="text-gray-400 dark:text-gray-500 hover:text-white transition-colors text-sm">
+                <Link href="#" className="text-muted-foreground hover:text-foreground transition-colors text-sm">
                   Shipping Info
                 </Link>
               </li>
               <li>
-                <Link href="#" className="text-gray-400 dark:text-gray-500 hover:text-white transition-colors text-sm">
+                <Link href="#" className="text-muted-foreground hover:text-foreground transition-colors text-sm">
                   Returns
                 </Link>
               </li>
               <li>
-                <Link href="#" className="text-gray-400 dark:text-gray-500 hover:text-white transition-colors text-sm">
+                <Link href="#" className="text-muted-foreground hover:text-foreground transition-colors text-sm">
                   FAQ
                 </Link>
               </li>
@@ -67,13 +67,13 @@ export function Footer() {
 
           {/* Social */}
           <div>
-            <h3 className="text-lg font-semibold mb-4">Follow Us</h3>
+            <h3 className="text-lg font-semibold mb-4 text-foreground">Follow Us</h3>
             <div className="flex space-x-4">
               <a
                 href="https://github.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-gray-400 dark:text-gray-500 hover:text-white transition-colors"
+                className="text-muted-foreground hover:text-foreground transition-colors"
               >
                 <Github className="h-5 w-5" />
               </a>
@@ -81,7 +81,7 @@ export function Footer() {
                 href="https://twitter.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-gray-400 dark:text-gray-500 hover:text-white transition-colors"
+                className="text-muted-foreground hover:text-foreground transition-colors"
               >
                 <Twitter className="h-5 w-5" />
               </a>
@@ -89,7 +89,7 @@ export function Footer() {
                 href="https://linkedin.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-gray-400 dark:text-gray-500 hover:text-white transition-colors"
+                className="text-muted-foreground hover:text-foreground transition-colors"
               >
                 <Linkedin className="h-5 w-5" />
               </a>
@@ -98,8 +98,8 @@ export function Footer() {
         </div>
 
         {/* Copyright */}
-        <div className="border-t border-gray-800 dark:border-gray-900 mt-8 pt-8 text-center">
-          <p className="text-gray-400 dark:text-gray-500 text-sm">
+        <div className="border-t mt-8 pt-8 text-center">
+          <p className="text-muted-foreground text-sm">
             &copy; {currentYear} ShopHub. All rights reserved. Built with Next.js, React, and TypeScript.
           </p>
         </div>
