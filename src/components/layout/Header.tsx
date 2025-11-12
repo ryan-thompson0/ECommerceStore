@@ -1,5 +1,5 @@
 /**
- * Header component with navigation and cart
+ * Premium header with glassmorphism and floating effect
  */
 
 'use client';
@@ -13,59 +13,79 @@ export function Header() {
   const totalItems = useCartStore((state) => state.totalItems);
 
   return (
-    <header className="sticky top-0 z-50 border-b shadow-sm" style={{ backgroundColor: 'hsl(var(--background))' }}>
-      <div className="container mx-auto px-4 py-4">
-        <div className="flex items-center justify-between">
-          {/* Logo */}
-          <Link href="/" className="flex items-center space-x-2 hover:opacity-80 transition-opacity">
-            <Store className="h-8 w-8 text-primary" />
-            <span className="text-2xl font-bold text-foreground">ShopHub</span>
-          </Link>
-
-          {/* Navigation */}
-          <nav className="hidden md:flex items-center space-x-8">
+    <header className="sticky top-0 z-50 animate-slide-up">
+      {/* Glassmorphism Background */}
+      <div className="glass-card border-b border-primary/20 shadow-glow">
+        <div className="container mx-auto px-4 py-5">
+          <div className="flex items-center justify-between">
+            {/* Logo with Gradient Effect */}
             <Link
               href="/"
-              className="text-foreground/70 hover:text-primary font-medium transition-colors"
+              className="flex items-center space-x-3 group hover:scale-105 transition-transform duration-300"
             >
-              Products
-            </Link>
-            <Link
-              href="/about"
-              className="text-foreground/70 hover:text-primary font-medium transition-colors"
-            >
-              About
-            </Link>
-            <Link
-              href="/contact"
-              className="text-foreground/70 hover:text-primary font-medium transition-colors"
-            >
-              Contact
-            </Link>
-          </nav>
-
-          {/* Actions */}
-          <div className="flex items-center gap-4">
-            {/* Theme Toggle */}
-            <ThemeToggle />
-
-              {/* Cart */}
-            <Link
-              href="/cart"
-              className="flex items-center space-x-2 text-foreground/70 hover:text-primary transition-colors"
-            >
-              <div className="relative inline-flex">
-                <ShoppingCart className="h-6 w-6" />
-                {totalItems > 0 && (
-                  <span className="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-red-600 text-[10px] font-bold text-white">
-                    {totalItems}
-                  </span>
-                )}
+              <div className="relative">
+                <div className="absolute inset-0 bg-gradient-primary blur-lg opacity-50 group-hover:opacity-75 transition-opacity duration-300" />
+                <Store className="h-9 w-9 text-primary relative z-10 group-hover:rotate-12 transition-transform duration-300" />
               </div>
-              <span className="hidden sm:inline font-medium">Cart</span>
+              <span className="text-2xl font-black bg-gradient-primary bg-clip-text text-transparent group-hover:animate-pulse-glow">
+                ShopHub
+              </span>
             </Link>
+
+            {/* Navigation with Enhanced Styling */}
+            <nav className="hidden md:flex items-center space-x-2">
+              <Link
+                href="/"
+                className="relative px-4 py-2 text-foreground/80 hover:text-primary font-semibold transition-all duration-300 group overflow-hidden rounded-lg"
+              >
+                <span className="relative z-10">Products</span>
+                <div className="absolute inset-0 bg-gradient-primary opacity-0 group-hover:opacity-10 transition-opacity duration-300" />
+                <div className="absolute bottom-0 left-0 h-0.5 w-0 bg-gradient-primary group-hover:w-full transition-all duration-300" />
+              </Link>
+              <Link
+                href="/about"
+                className="relative px-4 py-2 text-foreground/80 hover:text-primary font-semibold transition-all duration-300 group overflow-hidden rounded-lg"
+              >
+                <span className="relative z-10">About</span>
+                <div className="absolute inset-0 bg-gradient-primary opacity-0 group-hover:opacity-10 transition-opacity duration-300" />
+                <div className="absolute bottom-0 left-0 h-0.5 w-0 bg-gradient-primary group-hover:w-full transition-all duration-300" />
+              </Link>
+              <Link
+                href="/contact"
+                className="relative px-4 py-2 text-foreground/80 hover:text-primary font-semibold transition-all duration-300 group overflow-hidden rounded-lg"
+              >
+                <span className="relative z-10">Contact</span>
+                <div className="absolute inset-0 bg-gradient-primary opacity-0 group-hover:opacity-10 transition-opacity duration-300" />
+                <div className="absolute bottom-0 left-0 h-0.5 w-0 bg-gradient-primary group-hover:w-full transition-all duration-300" />
+              </Link>
+            </nav>
+
+            {/* Actions with Enhanced Styling */}
+            <div className="flex items-center gap-4">
+              {/* Theme Toggle */}
+              <ThemeToggle />
+
+              {/* Cart with Premium Design */}
+              <Link
+                href="/cart"
+                className="flex items-center space-x-2 px-4 py-2 rounded-lg bg-primary text-white [background-image:var(--gradient-primary)] hover:shadow-glow-lg hover:scale-105 transition-all duration-300 group"
+              >
+                <div className="relative inline-flex">
+                  <ShoppingCart className="h-5 w-5 group-hover:rotate-12 transition-transform duration-300" />
+                  {totalItems > 0 && (
+                    <span className="absolute -top-2 -right-2 flex h-5 w-5 items-center justify-center rounded-full [background-image:var(--gradient-cosmic)] text-white text-[10px] font-bold shadow-glow animate-pulse-glow border border-white/30">
+                      {totalItems}
+                    </span>
+                  )}
+                </div>
+                <span className="hidden sm:inline font-bold">Cart</span>
+              </Link>
+            </div>
           </div>
         </div>
+
+        {/* Bottom Gradient Border */}
+        <div className="h-1 bg-gradient-to-r from-transparent via-primary to-transparent opacity-50" />
       </div>
     </header>
   );
