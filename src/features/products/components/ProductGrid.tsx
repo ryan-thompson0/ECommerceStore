@@ -2,6 +2,8 @@
  * Product grid component for displaying products in a responsive grid layout
  */
 
+'use client';
+
 import type { Product } from '@/types';
 import { ProductCard } from './ProductCard';
 
@@ -20,8 +22,16 @@ export function ProductGrid({ products }: ProductGridProps) {
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-      {products.map((product) => (
-        <ProductCard key={product.id} product={product} />
+      {products.map((product, index) => (
+        <div
+          key={product.id}
+          className="animate-pop-in"
+          style={{
+            animationDelay: `${index * 0.1}s`,
+          }}
+        >
+          <ProductCard product={product} />
+        </div>
       ))}
     </div>
   );

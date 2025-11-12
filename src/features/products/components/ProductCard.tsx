@@ -4,9 +4,10 @@
 
 'use client';
 
+import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Star, ShoppingCart, Sparkles } from 'lucide-react';
+import { Star, ShoppingCart, Sparkles, Check } from 'lucide-react';
 import type { Product } from '@/types';
 import { Card, Button, Badge } from '@/components/ui';
 import { formatCurrency } from '@/lib/utils/format';
@@ -18,15 +19,18 @@ interface ProductCardProps {
 
 export function ProductCard({ product }: ProductCardProps) {
   const addItem = useCartStore((state) => state.addItem);
+  const [isAdded, setIsAdded] = useState(false);
 
   const handleAddToCart = (e: React.MouseEvent) => {
     e.preventDefault();
     addItem(product);
+    setIsAdded(true);
+    setTimeout(() => setIsAdded(false), 2000);
   };
 
   return (
     <Link href={`/products/${product.slug}`} className="group block">
-      <Card className="h-full flex flex-col overflow-hidden relative transform-3d transition-all duration-500 hover:scale-[1.02] hover:-translate-y-2 hover:shadow-glow-lg animate-scale-in glass-card border-2 border-primary/10 hover:border-primary/30">
+      <Card className="h-full flex flex-col overflow-hidden relative transform-3d transition-all duration-500 hover:scale-[1.02] hover:-translate-y-2 hover:shadow-glow-lg glass-card border-2 border-primary/10 hover:border-primary/30">
         {/* Gradient Overlay on Hover */}
         <div className="absolute inset-0 bg-gradient-primary opacity-0 group-hover:opacity-5 transition-opacity duration-500 pointer-events-none z-10" />
 
@@ -112,11 +116,20 @@ export function ProductCard({ product }: ProductCardProps) {
             <Button
               size="default"
               onClick={handleAddToCart}
-              disabled={product.inventory === 0}
+              disabled={product.inventory === 0 || isAdded}
               className="flex items-center space-x-2 bg-gradient-primary hover:shadow-glow-lg hover:scale-105 transition-all duration-300 border-0 shadow-colored group/button"
             >
-              <ShoppingCart className="h-4 w-4 group-hover/button:rotate-12 transition-transform duration-300" />
-              <span className="font-medium">Add to Cart</span>
+              {isAdded ? (
+                <>
+                  <Check className="h-4 w-4" />
+                  <span className="font-medium">Added!</span>
+                </>
+              ) : (
+                <>
+                  <ShoppingCart className="h-4 w-4 group-hover/button:rotate-12 transition-transform duration-300" />
+                  <span className="font-medium">Add to Cart</span>
+                </>
+              )}
             </Button>
           </div>
         </div>
