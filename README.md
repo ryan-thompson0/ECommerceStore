@@ -299,7 +299,7 @@ This project is open source and available under the [MIT License](LICENSE).
 
 ## 👤 Author
 
-Built as a portfolio project to demonstrate modern web development practices.
+Ryan Thompson
 
 ## 🙏 Acknowledgments
 
